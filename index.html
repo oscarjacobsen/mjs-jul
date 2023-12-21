@@ -1,9 +1,80 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<head>
+  <meta charset="utf-8" />
+  <title>God jul kjære</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
+  <link
+    href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+    <p>Å nei!? <br>Fikk du bare en liten magisk julekule under treet du da? Dette må bety at nissen må ha forsvunnet på veg med gaven til... <br>Nissen(med pakken din) ble sist sett ridende på nordlyset over Norge et sted.<br>Kanskje du klarer å spore opp pakken din selv?</p>
+  <div
+    id="cesiumContainer"
+    style="position: absolute; top: 100px; right: 0px; bottom: 0px; left: 0px"
+  ></div>
+  <script>
+    Cesium.Ion.defaultAccessToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2MDRhZjhkMy00NzFmLTQ1YjMtODdkNC1kNjg1NDdjOTA0NzkiLCJpZCI6MTUwMDM5LCJpYXQiOjE2ODc5NzA3MjV9.Y5o4gm3fbyWsTlSClKV_Yt_rMFFxaWAhTPyPXBgb0ek";
 
-    </head>
-    <body>
-        <h1>HelloWorld</h1>
-    </body>
-</html>
+    // Enable simultaneous requests.
+    Cesium.RequestScheduler.requestsByServer["tile.googleapis.com:443"] = 18;
+
+    ///////////////////////////////////
+
+    var imagerySources = Cesium.createDefaultImageryProviderViewModels();
+
+    //////////////////////////////////
+
+    // Create the viewer.
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+      
+      imageryProviderViewModels : imagerySources,
+      selectedImageryProviderViewModel : imagerySources[2],
+      // Use Cesium World Terrain
+      //imageryProviderViewModels : imagerySources,
+      //imageryProvider: false,
+      baseLayerPicker: true,
+      geocoder: true,
+      globe: false,
+      // https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/#enabling-request-render-mode
+      //requestRenderMode: true,
+      //
+    })
+
+    console.log(viewer.scene.globe)
+
+
+    // Allows to go under ground
+    
+
+    // Add 3D Tiles tileset.
+    const tileset = viewer.scene.primitives.add(
+      new Cesium.Cesium3DTileset({
+        url: "https://tile.googleapis.com/v1/3dtiles/root.json?key=AIzaSyCCqbVcBMOK2gV_IGIrX3N3Hv_c5qMw52o",
+        // This property is needed to appropriately display attributions
+        // as required.
+        showCreditsOnScreen: true,
+      })
+    );
+
+    // Loading OSM Buildings
+    Cesium.Cesium3DTileset.fromIonAssetId(96188).then((res) => {
+      viewer.scene.primitives.add(res);
+    });
+
+    
+    // Loading E18 Asset tunnel
+    Cesium.Cesium3DTileset.fromIonAssetId(1910039).then((res) => {
+      viewer.scene.primitives.add(res);
+    });
+
+    //
+    //try {
+    //
+    //} catch (error) {
+    //  console.log('FAAAAILED: $(error)');
+    //}
+  </script>
+</body>
