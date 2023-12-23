@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8" />
   <title>God jul kjære</title>
+  <img src="logo.png" alt="Logo" class="logo">
   <script src="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Cesium.js"></script>
   <link
     href="https://ajax.googleapis.com/ajax/libs/cesiumjs/1.105/Build/Cesium/Widgets/widgets.css"
@@ -71,13 +72,11 @@
       viewer.scene.primitives.add(res);
     });
 
-
-
-    
-    // Loading E18 Asset tunnel
-    Cesium.Cesium3DTileset.fromIonAssetId(1910039).then((res) => {
+    // Add Nisse
+    Cesium.Cesium3DTileset.fromIonAssetId(2404907).then((res) => {
       viewer.scene.primitives.add(res);
     });
+
 
     //
     //try {
