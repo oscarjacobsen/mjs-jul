@@ -9,7 +9,7 @@
   />
 </head>
 <body>
-    <p>Å nei!? <br>Fikk du bare en julekubbe og magisk julekule under treet du da? Dette må bety at nissen må ha forsvunnet på veg med gaven til... <br>Nissen(med gaven din din) ble sist sett ridende på nordlyset over Norge et sted.<br>Kanskje du klarer å spore opp pakken din selv?</p>
+    <p style="font-size:small;">Å nei!? <br>Fikk du bare en julekubbe og magisk julekule under treet du da? Dette må bety at nissen må ha forsvunnet på veg med gaven til... <br>Nissen(med gaven din din) ble sist sett ridende på nordlyset over Norge et sted.<br>Kanskje du klarer å spore opp pakken din selv?</p>
   <div
     id="cesiumContainer"
     style="position: absolute; top: 150px; right: 0px; bottom: 0px; left: 0px"
@@ -72,10 +72,14 @@
     });
 
     // Add Nisse
-    Cesium.Cesium3DTileset.fromIonAssetId(2405940).then((res) => {
+    Cesium.Cesium3DTileset.fromIonAssetId(2406215).then((res) => {
       viewer.scene.primitives.add(res);
     });
 
+    // Add Nisse
+    Cesium.Cesium3DTileset.fromIonAssetId(2406221).then((res) => {
+      viewer.scene.primitives.add(res);
+    });
 
     //
     //try {
